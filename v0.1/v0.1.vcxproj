@@ -127,12 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Studentas.cpp" />
     <ClCompile Include="v0.1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai10000.txt" />
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai100000.txt" />
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai1000000.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Studentas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

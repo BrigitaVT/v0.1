@@ -18,10 +18,18 @@
     <ClCompile Include="v0.1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Studentas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai10000.txt" />
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai100000.txt" />
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai1000000.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Studentas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
