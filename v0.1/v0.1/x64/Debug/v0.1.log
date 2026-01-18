@@ -1,11 +1,4 @@
-﻿  Studentas.cpp
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(6,45): warning C4566: character represented by universal-character-name '\u0105' cannot be represented in the current code page (1252)
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(6,45): warning C4566: character represented by universal-character-name '\u010D' cannot be represented in the current code page (1252)
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(13,45): warning C4566: character represented by universal-character-name '\u0105' cannot be represented in the current code page (1252)
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(13,45): warning C4566: character represented by universal-character-name '\u010D' cannot be represented in the current code page (1252)
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(89,46): warning C4566: character represented by universal-character-name '\u0117' cannot be represented in the current code page (1252)
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\Studentas.cpp(89,46): warning C4566: character represented by universal-character-name '\u0173' cannot be represented in the current code page (1252)
+﻿  IO.cpp
   v0.1.cpp
-C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\v0.1.cpp(102,22): warning C4566: character represented by universal-character-name '\u010D' cannot be represented in the current code page (1252)
   Generating Code...
   v0.1.vcxproj -> C:\Users\birut\OneDrive\Documents\repose\v0.1\v0.1\x64\Debug\v0.1.exe

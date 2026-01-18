@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IO.cpp" />
+    <ClCompile Include="Skaiciavimai.cpp" />
     <ClCompile Include="Studentas.cpp" />
     <ClCompile Include="v0.1.cpp" />
   </ItemGroup>
@@ -136,6 +138,8 @@
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai1000000.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IO.h" />
+    <ClInclude Include="Skaiciavimai.h" />
     <ClInclude Include="Studentas.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

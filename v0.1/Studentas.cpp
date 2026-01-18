@@ -1,126 +1,110 @@
 ﻿#include "Studentas.h"
-#include <algorithm>
+#include "Skaiciavimai.h"
 #include <stdexcept>
 
-static double vidurkis(const std::vector<int>& v) {
-    if (v.empty()) throw std::runtime_error("ND sąrašas tuščias (vidurkis).");
-    double sum = 0.0;
-    for (int x : v) sum += x;
-    return sum / v.size();
-}
-
-static double mediana(std::vector<int> v) {
-    if (v.empty()) throw std::runtime_error("ND sąrašas tuščias (mediana).");
-    std::sort(v.begin(), v.end());
-    size_t n = v.size();
-    if (n % 2 == 1) return v[n / 2];
-    return (v[n / 2 - 1] + v[n / 2]) / 2.0;
-}
-
 Studentas::Studentas()
-    : name(""), surname(""), ndC(nullptr), ndCount(0),
-    nd(), egz(0), galVid(0.0), galMed(0.0) {
+    : ndC_(nullptr), ndCountC_(0), egz_(0), galVid_(0), galMed_(0) {
 }
 
 Studentas::Studentas(const std::string& n, const std::string& s)
-    : name(n), surname(s), ndC(nullptr), ndCount(0),
-    nd(), egz(0), galVid(0.0), galMed(0.0) {
+    : name_(n), surname_(s), ndC_(nullptr), ndCountC_(0),
+    egz_(0), galVid_(0), galMed_(0) {
 }
 
 Studentas::Studentas(const Studentas& other)
-    : name(other.name), surname(other.surname),
-    ndC(nullptr), ndCount(other.ndCount),
-    nd(other.nd), egz(other.egz),
-    galVid(other.galVid), galMed(other.galMed) {
-    if (ndCount > 0) {
-        ndC = new int[ndCount];
-        for (int i = 0; i < ndCount; i++) ndC[i] = other.ndC[i];
+    : name_(other.name_), surname_(other.surname_),
+    ndC_(nullptr), ndCountC_(other.ndCountC_),
+    ndV_(other.ndV_), egz_(other.egz_),
+    galVid_(other.galVid_), galMed_(other.galMed_) {
+    if (ndCountC_ > 0) {
+        ndC_ = new int[ndCountC_];
+        for (int i = 0; i < ndCountC_; i++) ndC_[i] = other.ndC_[i];
     }
 }
 
 Studentas& Studentas::operator=(const Studentas& other) {
     if (this == &other) return *this;
-
-    delete[] ndC;
-    ndC = nullptr;
-    ndCount = 0;
-
-    name = other.name;
-    surname = other.surname;
-    nd = other.nd;
-    egz = other.egz;
-    galVid = other.galVid;
-    galMed = other.galMed;
-
-    ndCount = other.ndCount;
-    if (ndCount > 0) {
-        ndC = new int[ndCount];
-        for (int i = 0; i < ndCount; i++) ndC[i] = other.ndC[i];
+    delete[] ndC_;
+    ndC_ = nullptr;
+    ndCountC_ = other.ndCountC_;
+    name_ = other.name_;
+    surname_ = other.surname_;
+    ndV_ = other.ndV_;
+    egz_ = other.egz_;
+    galVid_ = other.galVid_;
+    galMed_ = other.galMed_;
+    if (ndCountC_ > 0) {
+        ndC_ = new int[ndCountC_];
+        for (int i = 0; i < ndCountC_; i++) ndC_[i] = other.ndC_[i];
     }
     return *this;
 }
 
 Studentas::~Studentas() {
-    delete[] ndC;
+    delete[] ndC_;
 }
 
-void Studentas::clearND() {
-    nd.clear();
-    delete[] ndC;
-    ndC = nullptr;
-    ndCount = 0;
+void Studentas::setName(const std::string& n) { name_ = n; }
+void Studentas::setSurname(const std::string& s) { surname_ = s; }
+void Studentas::setEgz(int e) { egz_ = e; }
+
+const std::string& Studentas::getName() const { return name_; }
+const std::string& Studentas::getSurname() const { return surname_; }
+double Studentas::getGalVid() const { return galVid_; }
+double Studentas::getGalMed() const { return galMed_; }
+
+void Studentas::clearAll() {
+    ndV_.clear();
+    delete[] ndC_;
+    ndC_ = nullptr;
+    ndCountC_ = 0;
 }
 
-void Studentas::addND(int x) {
-    nd.push_back(x);
+void Studentas::addNDVector(int x) {
+    ndV_.push_back(x);
 }
 
-void Studentas::syncCArrayFromVector() {
-    delete[] ndC;
-    ndC = nullptr;
-    ndCount = static_cast<int>(nd.size());
-    if (ndCount > 0) {
-        ndC = new int[ndCount];
-        for (int i = 0; i < ndCount; i++) ndC[i] = nd[i];
-    }
+void Studentas::pushBackC(int x) {
+    int* temp = new int[ndCountC_ + 1];
+    for (int i = 0; i < ndCountC_; i++) temp[i] = ndC_[i];
+    temp[ndCountC_] = x;
+    delete[] ndC_;
+    ndC_ = temp;
+    ndCountC_++;
+}
+
+void Studentas::addNDCArray(int x) {
+    pushBackC(x);
+}
+
+void Studentas::syncCFromVector() {
+    delete[] ndC_;
+    ndCountC_ = ndV_.size();
+    ndC_ = new int[ndCountC_];
+    for (int i = 0; i < ndCountC_; i++) ndC_[i] = ndV_[i];
+}
+
+void Studentas::syncVectorFromC() {
+    ndV_.clear();
+    for (int i = 0; i < ndCountC_; i++) ndV_.push_back(ndC_[i]);
 }
 
 void Studentas::skaiciuotiGalutinius() {
-    if (nd.empty()) throw std::runtime_error("Nėra ND pažymių.");
-    if (egz < 1 || egz > 10) throw std::runtime_error("Egzamino pažymys neteisingas.");
-
-    double v = vidurkis(nd);
-    double m = mediana(nd);
-
-    galVid = 0.4 * v + 0.6 * egz;
-    galMed = 0.4 * m + 0.6 * egz;
+    galVid_ = 0.4 * vidurkis(ndV_) + 0.6 * egz_;
+    galMed_ = 0.4 * mediana(ndV_) + 0.6 * egz_;
 }
 
 std::istream& operator>>(std::istream& in, Studentas& s) {
-    s.clearND();
-
-    in >> s.name >> s.surname;
-    if (!in) return in;
-
-    std::cout << "Vesk ND (1-10), pabaigai 0: ";
+    s.clearAll();
+    in >> s.name_ >> s.surname_;
     int x;
-    while (in >> x) {
-        if (x == 0) break;
-        if (x < 1 || x > 10) {
-            std::cout << "Blogas ND, bandyk dar: ";
-            continue;
-        }
-        s.addND(x);
-    }
-
-    std::cout << "Vesk egzamino bala (1-10): ";
-    in >> s.egz;
-
-    s.syncCArrayFromVector();
+    while (in >> x && x != 0) s.addNDVector(x);
+    in >> s.egz_;
+    s.syncCFromVector();
     return in;
 }
 
 std::ostream& operator<<(std::ostream& out, const Studentas& s) {
-    out << s.surname << " " << s.name;
+    out << s.surname_ << " " << s.name_;
     return out;
 }

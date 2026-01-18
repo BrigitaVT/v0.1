@@ -21,6 +21,12 @@
     <ClCompile Include="Studentas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skaiciavimai.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\..\..\Desktop\sisteminis programavimas\studentai10000.txt" />
@@ -29,6 +35,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Studentas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skaiciavimai.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

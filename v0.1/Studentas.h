@@ -5,50 +5,47 @@
 
 class Studentas {
 private:
-    std::string name;
-    std::string surname;
+    std::string name_;
+    std::string surname_;
 
-    // C dinaminis masyvas (dėl užduoties reikalavimo)
-    int* ndC;
-    int ndCount;
+    int* ndC_;
+    int ndCountC_;
 
-    // Pagrindinis saugojimas (vektorinė versija)
-    std::vector<int> nd;
+    std::vector<int> ndV_;
 
-    int egz;
-    double galVid;
-    double galMed;
+    int egz_;
+    double galVid_;
+    double galMed_;
+
+    void pushBackC(int x);
 
 public:
-    // Konstruktoriai
     Studentas();
     Studentas(const std::string& n, const std::string& s);
 
-    // Rule of three
     Studentas(const Studentas& other);
     Studentas& operator=(const Studentas& other);
     ~Studentas();
 
-    // Set
-    void setName(const std::string& n) { name = n; }
-    void setSurname(const std::string& s) { surname = s; }
-    void setEgz(int e) { egz = e; }
+    void setName(const std::string& n);
+    void setSurname(const std::string& s);
+    void setEgz(int e);
 
-    // Get
-    const std::string& getName() const { return name; }
-    const std::string& getSurname() const { return surname; }
-    double getGalVid() const { return galVid; }
-    double getGalMed() const { return galMed; }
+    const std::string& getName() const;
+    const std::string& getSurname() const;
+    double getGalVid() const;
+    double getGalMed() const;
 
-    // ND valdymas
-    void clearND();
-    void addND(int x);
-    void syncCArrayFromVector();
+    void clearAll();
 
-    // Skaičiavimai
+    void addNDVector(int x);
+    void addNDCArray(int x);
+
+    void syncCFromVector();
+    void syncVectorFromC();
+
     void skaiciuotiGalutinius();
 
-    // Operatoriai (rankiniam įvedimui, jei prireiks)
     friend std::istream& operator>>(std::istream& in, Studentas& s);
     friend std::ostream& operator<<(std::ostream& out, const Studentas& s);
 };
